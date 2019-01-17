@@ -38,8 +38,8 @@ class TodoList extends Component {
                     />
                     <ListItemText primary={todo.text} />
                     <ListItemSecondaryAction>
-                        <IconButton aria-label="remove">
-                            <ClearIcon onClick={() => this.handleRemoveClick(todo.id)} />
+                        <IconButton aria-label="remove" onClick={() => this.handleRemoveClick(todo.id)}>
+                            <ClearIcon  />
                         </IconButton>
                     </ListItemSecondaryAction>
                 </ListItem>)}
