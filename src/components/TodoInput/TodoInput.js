@@ -28,7 +28,7 @@ class App extends Component {
                 <FormControl>
                     <TextField
                         id="standard-with-placeholder"
-                        label="With placeholder"
+                        label="type todo!"
                         placeholder="Placeholder"
                         className={styles['input-todo']}
                         margin="normal"
