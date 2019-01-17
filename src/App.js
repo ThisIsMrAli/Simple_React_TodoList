@@ -8,10 +8,11 @@ import { Provider } from "react-redux";
 
 import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
+import { save, load } from "redux-localstorage-simple"
 
 import reducer from "./store";
 
-const reduxStore = createStore(reducer, { todos: [] }, applyMiddleware(logger));
+const reduxStore = createStore(reducer, load(), applyMiddleware(logger, save()));
 //const reduxStore = createStore(reducer);
 class App extends Component {
   render() {
