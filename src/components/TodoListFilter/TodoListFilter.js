@@ -11,7 +11,7 @@ const TodoListFilter = (props) => {
     const { handleChange, activeFilter, filters } = props;
     return (
         <FormControl component="fieldset" >
-            <FormLabel component="legend">Gender</FormLabel>
+            <FormLabel component="legend">Filter</FormLabel>
             <RadioGroup
                 aria-label="filter Todos"
                 name="filter"
