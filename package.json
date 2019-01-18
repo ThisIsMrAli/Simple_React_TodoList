@@ -13,6 +13,17 @@
     "redux-localstorage-simple": "^2.1.4",
     "redux-logger": "^3.0.6"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CreativeMindW/Simple_React_TodoList.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "todoapp",
+    "materialUI"
+  ],
+  "author": "Ali Yousefi",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
