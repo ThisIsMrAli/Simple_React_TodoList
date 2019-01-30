@@ -11,7 +11,7 @@ describe('test_actions', () => {
         store.clearActions();
     })
     describe("addTodo", () => {
-        test('Dispatchs correct action and payload',()=>{
+        test('Dispatchs correct action and payload', () => {
             const expectedActions = {
                 'payload': 'a new todo',
                 'type': 'ADD_TODO'
@@ -20,4 +20,28 @@ describe('test_actions', () => {
             expect(store.getActions()).toEqual([expectedActions]);
         })
     })
+    // describe("addTodo", () => {
+    //     test('Dispatchs correct action and payload', () => {
+    //         store.dispatch(Actions.addTodo('a new fucking todo'));
+    //         expect(store.getActions()).toMatchSnapshot();
+    //     })
+    // })
+
+    describe("toggleTodoStatus", () => {
+        const expectedActions = {
+            'payload': 1,
+            'type': 'TOGGLE_TODO_STATUS'
+        };
+        test('status changes in correct way', () => {
+            store.dispatch(Actions.toggleTodoStatus(1));
+            expect(store.getActions()).toEqual([expectedActions])
+        })
+    })
+
+    // describe("toggleTodoStatus", () => {
+    //     test('status changes in correct way', () => {
+    //         store.dispatch(Actions.toggleTodoStatus(1));
+    //         expect(store.getActions()).toMatchSnapshot();
+    //     })
+    // })
 })
