@@ -17,7 +17,7 @@ describe('test_actions', () => {
                 'type': 'ADD_TODO'
             };
             store.dispatch(Actions.addTodo('a new todo'));
-            expect(store.getActions()).toEqual(expectedActions);
+            expect(store.getActions()).toEqual([expectedActions]);
         })
     })
 })

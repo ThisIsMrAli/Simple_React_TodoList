@@ -19,7 +19,7 @@ const TodoListFilter = (props) => {
                 row
                 onChange={(event) => handleChange(event.target.value)}
             >
-                {filters.map(filter => (<FormControlLabel value={filter} control={<Radio />} label={filter} />))}
+                {filters.map(filter => (<FormControlLabel key={filter} value={filter} control={<Radio />} label={filter} />))}
             </RadioGroup>
         </FormControl>
     )
