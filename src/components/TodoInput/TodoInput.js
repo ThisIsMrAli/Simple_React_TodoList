@@ -1,46 +1,39 @@
 import styles from './TodoInput.module.css';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl'
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from "react-redux";
 import { addTodo } from './../../store/actions';
-class App extends Component {
-    state = {
-        formText: ''
+const TodoInput = (props) => {
+    const [formText, setFormText] = useState('');
+    const handleChange = event => {
+        setFormText(event.target.value);
     };
-    handleChange = event => {
-        this.setState({
-            formText: event.target.value
-        });
-    };
-    handleSubmit = event => {
-        // console.log(this.state.item);
+    const handleSubmit = event => {
         event.preventDefault();
-        if (this.state.formText !== "") {
-            this.props.addTodo(this.state.formText)
+        if (formText !== "") {
+            props.addTodo(formText)
 
         }
-        this.setState({ formText: "" });
+        setFormText("");
     };
-    render() {
-        return (
-            <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-                <FormControl>
-                    <TextField
-                        id="standard-with-placeholder"
-                        label="type todo!"
-                        placeholder="Placeholder"
-                        className={styles['input-todo']}
-                        margin="normal"
-                        onChange={this.handleChange}
-                        value= {this.state.formText}
-                    />
-                </FormControl>
-            </form>
-        );
-    }
+    return (
+        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+            <FormControl>
+                <TextField
+                    id="standard-with-placeholder"
+                    label="type todo!"
+                    placeholder="Placeholder"
+                    className={styles['input-todo']}
+                    margin="normal"
+                    onChange={handleChange}
+                    value={formText}
+                />
+            </FormControl>
+        </form>
+    );
 }
 const mapDispatchToProps = dispatch => ({
     addTodo: todo => dispatch(addTodo(todo))
 });
-export default connect(null,mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(TodoInput);

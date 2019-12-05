@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { connect } from "react-redux";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -23,55 +23,49 @@ const styles = theme => ({
 const FILTERS = {
     ALL: "ALL",
     COMPELETED: 'COMPELETED',
-    INCOMPELETED:'INCOMPELETED'
+    INCOMPELETED: 'INCOMPELETED'
 }
 
-class TodoList extends Component {
-    state = {
-        activeFilter: FILTERS.ALL,
-        filters: [
-            FILTERS.ALL,
-            FILTERS.COMPELETED,
-            FILTERS.INCOMPELETED
-        ]
+const TodoList = (props) => {
+
+    const [activeFilter, setActiveFilter] = useState(FILTERS.ALL);
+    const [filters, setFilters] = useState([FILTERS.ALL,
+    FILTERS.COMPELETED,
+    FILTERS.INCOMPELETED]);
+
+    const handleToggle = (id) => {
+        props.toggleTodo(id);
     }
-    handleToggle = (id) => {
-        this.props.toggleTodo(id);
+    const handleRemoveClick = (id) => {
+        props.removeTodo(id);
     }
-    handleRemoveClick = (id) => {
-        this.props.removeTodo(id);
+    const handleFilterChange = (filter) => {
+        setActiveFilter(filter);
     }
-    handleFilterChange = (filter) => {
-        this.setState({
-            activeFilter: filter
-        })
-    }
-    render() {
-        const { classes } = this.props;
-        console.log(this.state.activeFilter === FILTERS.ALL)
-        const filteredTodos = this.state.activeFilter === FILTERS.ALL? this.props.todos:
-        this.props.todos.filter(todo => this.state.activeFilter == FILTERS.COMPELETED ? todo.compeleted : !todo.compeleted)
-        return (
-            <div className={cssStyles['list-root']}>
-                <List className={classes.root}>
-                    {filteredTodos.map(todo => <ListItem key={todo.id} role={undefined} dense button onClick={() => this.handleToggle(todo.id)}>
-                        <Checkbox
-                            checked={todo.compeleted}
-                            tabIndex={-1}
-                            disableRipple
-                        />
-                        <ListItemText primary={todo.text} />
-                        <ListItemSecondaryAction>
-                            <IconButton aria-label="remove" onClick={() => this.handleRemoveClick(todo.id)}>
-                                <ClearIcon />
-                            </IconButton>
-                        </ListItemSecondaryAction>
-                    </ListItem>)}
-                </List>
-                <TodoListFilter handleChange={this.handleFilterChange} filters={this.state.filters} activeFilter={this.state.activeFilter} />
-            </div>
-        )
-    }
+    const { classes } = props;
+    const filteredTodos = activeFilter === FILTERS.ALL ? props.todos :
+       props.todos.filter(todo => activeFilter == FILTERS.COMPELETED ? todo.compeleted : !todo.compeleted)
+    return (
+        <div className={cssStyles['list-root']}>
+            <List className={classes.root}>
+                {filteredTodos.map(todo => <ListItem key={todo.id} role={undefined} dense button onClick={() => handleToggle(todo.id)}>
+                    <Checkbox
+                        checked={todo.compeleted}
+                        tabIndex={-1}
+                        disableRipple
+                    />
+                    <ListItemText primary={todo.text} />
+                    <ListItemSecondaryAction>
+                        <IconButton aria-label="remove" onClick={() => handleRemoveClick(todo.id)}>
+                            <ClearIcon />
+                        </IconButton>
+                    </ListItemSecondaryAction>
+                </ListItem>)}
+            </List>
+            <TodoListFilter handleChange={handleFilterChange} filters={filters} activeFilter={activeFilter} />
+        </div>
+    )
+
 }
 
 const mapStateToProps = state => ({
